@@ -1,0 +1,84 @@
+/*
+STUFF
+    // var controllerProgress = global.controllerEnergy = Game.rooms['W13N45'].controller.progress;
+    // var energyInRoom = Game.rooms["W13N45"].energyAvailable;
+
+
+/*PRODUCT BACKLOG**************************************************************************************************************
+--------------------------------------------
+TO DO:
+- Write code for the extensions North to be fully filled.  Currently, distributors are spending all energy in storage. Write a function that sorts by type and prioritizes what gets filled where
+        
+- Identify pontetial issues and plan for them:
+    1. destroyed containers
+    
+- Differentiate between static and nonstatic roles better in naming of roles 
+
+- Add code to keep ramparts at X% of hitpoints instead of 100%
+- Implement more tower code
+    a. Towers need to repair
+    b. Towers need to heal
+--------------------------------------------
+
+CHANGE LOG:
+1/13/2020
+    *Added code to prioritize structures to fill (EXTENSIONS > TOWERS > SPAWN > STORAGE) to distributors
+    
+1/11/2020
+    *Added "ignoreCreeps: true" to creep.pos.findClosestByPath calls
+    *Replaced vars for minimum number of roles for constants
+
+1/10/2020
+    *Reached RCL 7
+    *Doubled distributor body parts
+    *Upgrader +3 WORK, +3 CARRY, +3 MOVE
+    
+1/9/2020
+    *Added "survival spawning" code
+
+1/3/2020
+    *Added code for upgraders to take energy from storage if storage has over 250k energy
+    *Added code to spawn miners if a miner is dead, despite of the population limit
+    
+12/31/19
+    *Woke up again to an empty room.  Happened because a container decayed into nothing and it completely killed the economy.
+     Need logic to ensure there is never an empty room
+     
+12/30/19
+    *Woke up to an empty room.  Miner bodies equaled more than 300 energy, so when creeps died due to whatever, nothing else spawned
+    *Created "miner2" role.  This role sends a miner to the other container.
+    *Added code to miner that tells them to go to a container not being used -> DONE
+
+12/29/19
+    *Changed role "upgrader2" to "lorry"
+    *Removed upgrader role change in miners (no carry body part, cannot harvest/upgrade/etc)
+    *Added "[role name]2" to all roles. Roles with 2 at the end use containers instead of energy sources
+    *Implemented static mining, woohoo!
+        - Miners are only going to 1 container... need them to go to both
+
+12/28/19
+    *Continue to adjust spawn limit and body parts limits
+    *Harvesters were sitting still if towers, spawns, or extensions were full.  Adde code to now make them they go upgrade
+
+12/26/19
+    *ADDED code for miner to change role to UPGRADER if all containers are full
+        - doesnt work because miner cannot have carry parts.  Hmmm...
+    *Miner only needs one MOVE part
+
+12/24/19
+    Current state:
+        1. Things happening in main:
+            a. Delete memory of dead creeps
+            b. Call scripts depending on role name of screeps
+            c. Tower code: attack hostiles.
+            d. Set up minimum numbers allowed of each role and only spawn those amounts allowed
+                
+        2. Role scripts:
+            a. Builder: builds things when there are things to be built. ALT script: harvest
+            b. Harvester: harvest from energy sources and fill SPAWN, EXTENSIONS, or TOWERS
+            c. Miner: find empty container, go to it, and harvest energy, which drops in container
+            d. Repairer: find STRUCTURE that needs to be repaired.  ALT script: builder
+            e. Upgrader: upgrade controller.  if empty of energy, harvest from energy source
+            f. Upgrader2: upgrade controller.  if empty of energy, go to nearest container with energy and withdraw
+            
+*******************************************************************************************************************************
